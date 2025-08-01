@@ -1,11 +1,15 @@
 using MinimalApi;
 
-IHostBuilder CreateHostBuilder(string[] args){
-  return Host.CreateDefaultBuilder(args)
-    .ConfigureWebHostDefaults(webBuilder =>
-    {
-        webBuilder.UseStartup<Startup>();
-    });
-}
+var builder = WebApplication.CreateBuilder(args);
 
-CreateHostBuilder(args).Build().Run();
+// ...existing code...
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.Run();
+// ...existing code...
